@@ -5,8 +5,8 @@ import EventAttendees from './EventAttendees'
 class EventListItem extends Component {
   render() {
 
-    const {event} = this.props;
-
+    const {event, onEventOpen} = this.props;
+    let hrefLink = '#';
     return (
       <Segment.Group>
         <Segment>
@@ -21,7 +21,7 @@ class EventListItem extends Component {
                 <Item.Header as="a">{event.title}</Item.Header>
                 <Item.Description>
                   Hosted by
-                  <a>{` ${event.hostedBy}`}</a>
+                  <a href={hrefLink}>{` ${event.hostedBy}`}</a>
                 </Item.Description>
               </Item.Content>
             </Item>
@@ -44,7 +44,7 @@ class EventListItem extends Component {
         </Segment>
         <Segment clearing>
           <span>{event.description}</span>
-          <Button as="a" color="teal" floated="right" content="View"/>
+          <Button onClick={onEventOpen(event)} as="a" color="teal" floated="right" content="View"/>
         </Segment>
       </Segment.Group>
     )

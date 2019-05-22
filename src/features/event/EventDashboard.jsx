@@ -5,6 +5,7 @@ import EventList from '../event/EventList';
 import EventForm from './EventForm';
 
 const eventsDashboard = [
+    // this the eventsDashboard
     {
         id: '1',
         title: 'Trip to Tower of London',

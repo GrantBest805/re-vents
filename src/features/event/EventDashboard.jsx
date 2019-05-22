@@ -5,6 +5,7 @@ import EventList from '../event/EventList';
 import EventForm from './EventForm';
 
 const eventsDashboard = [
+    // this the eventsDashboard
     {
         id: '1',
         title: 'Trip to Tower of London',
@@ -72,10 +73,11 @@ class EventDashboard extends Component {
     handleCreateEvent = (newEvent) => {
         newEvent.id = cuid();
         newEvent.hostPhotoURL = '/assets/user.png';
-        const updatedEvents = [...this.state.events, newEvent];
-        this.setState({
-            events: updatedEvents, isOpen: false
-        })
+        const updatedEvents = [
+            ...this.state.events,
+            newEvent
+        ];
+        this.setState({events: updatedEvents, isOpen: false})
     }
 
     render() {
@@ -86,13 +88,9 @@ class EventDashboard extends Component {
                     <EventList events={events}/>
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    <Button onClick={this.handleFormOpen} positive content="Create Event"/>
-                    {isOpen && (
-                        <EventForm
-                            createEvent={this.handleCreateEvent}
-                            handleFormClose={this.handleFormClose}
-                        />
-                    )}
+                    <Button onClick={this.handleFormOpen} positive content="Create Event"/> {isOpen && (<EventForm
+                        createEvent={this.handleCreateEvent}
+                        handleFormClose={this.handleFormClose}/>)}
                 </Grid.Column>
             </Grid>
         )

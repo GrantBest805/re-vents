@@ -74,6 +74,13 @@ class EventDashboard extends Component {
         this.setState(() => ({isOpen: false}));
     }
 
+    handleOpenEvent = (eventToOpen) => () => {
+        this.setState({
+            selectedEvent: eventToOpen,
+            isOpen: true
+        })
+    }
+
     handleCreateEvent = (newEvent) => {
         newEvent.id = cuid();
         newEvent.hostPhotoURL = '/assets/user.png';
@@ -98,11 +105,11 @@ class EventDashboard extends Component {
         })
     }
 
-    handleOpenEvent = (eventToOpen) => () => {
-        this.setState({
-            selectedEvent: eventToOpen,
-            isOpen: true
-        })
+    handleDeleteEvent = (eventToRemoveId) => () => {
+        const updatedEvents = this.state.events.filter(event => eventToRemoveId !== event.id);
+        this.setState(() => ({
+            events: updatedEvents
+        }));
     }
 
 
@@ -111,7 +118,7 @@ class EventDashboard extends Component {
         return (
             <Grid>
                 <Grid.Column width={10}>
-                    <EventList onEventOpen={this.handleOpenEvent} events={events}/>
+                    <EventList deleteEvent={this.handleDeleteEvent} onEventOpen={this.handleOpenEvent} events={events}/>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Button onClick={this.handleFormOpen} positive content="Create Event"/> {isOpen && (<EventForm

@@ -8,7 +8,7 @@ class EventList extends Component {
 
     return (
       <div>
-        <h1>Event List</h1>
+        <h1>Job List</h1>
         { events.map((event) => (
           <EventListItem deleteEvent={deleteEvent} key={event.id} event={event} />
         ))}

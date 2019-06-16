@@ -23,12 +23,14 @@ class TestPlaceInput extends React.Component {
 				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 					<div>
 						<input
+							style={{ marginBottom: '10px', borderRadius: '5px' }}
 							{...getInputProps({
 								placeholder: 'Search Places ...',
 								className: 'location-search-input',
 							})}
 						/>
-						<div className='autocomplete-dropdown-container'>
+						<hr />
+						<div style={{ marginTop: '10px' }} className='autocomplete-dropdown-container'>
 							{loading && <div>Loading...</div>}
 							{suggestions.map(suggestion => {
 								const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';

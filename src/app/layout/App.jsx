@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import NavBar from '../../features/nav/NavBar';
@@ -10,19 +10,18 @@ import SettingsDashboard from '../../features/settings/SettingsDashboard';
 import UserDetails from '../../features/user/UserDetails';
 import HomePage from '../../features/pages/HomePage';
 import TestComponent from '../../features/testarea/TestComponent';
+import ModalManager from '../../features/modals/ModalManager';
 
 class App extends Component {
 	render() {
 		return (
-			<div>
-				<Switch>
-					<Route exact path='/' component={HomePage} />
-				</Switch>
-
+			<Fragment>
+				<ModalManager />
+				<Route exact path='/' component={HomePage} />
 				<Route
 					path='/(.+)'
 					render={() => (
-						<div>
+						<Fragment>
 							<NavBar />
 							<Container className='main'>
 								<Switch key={this.props.location.key}>
@@ -35,10 +34,10 @@ class App extends Component {
 									<Route path={['/createEventForm', '/manage/:id']} component={EventForm} />
 								</Switch>
 							</Container>
-						</div>
+						</Fragment>
 					)}
 				/>
-			</div>
+			</Fragment>
 		);
 	}
 }

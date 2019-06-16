@@ -5,6 +5,7 @@ import { incrementCounter, decrementCounter } from './testActions';
 import TestPlaceInput from './TestPlaceInput';
 import SimpleMap from './SimpleMaps';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { openModal } from '../modals/modalActions';
 
 const mapState = state => ({
 	data: state.test.data,
@@ -13,15 +14,16 @@ const mapState = state => ({
 const actions = {
 	incrementCounter,
 	decrementCounter,
+	openModal,
 };
 
 class TestComponent extends Component {
 	state = {
 		latlng: {
 			lat: 59.95,
-			lng: 30.33
-		}
-	}
+			lng: 30.33,
+		},
+	};
 
 	handleSelect = address => {
 		geocodeByAddress(address)
@@ -35,17 +37,18 @@ class TestComponent extends Component {
 	};
 
 	render() {
-		const { incrementCounter, decrementCounter, data } = this.props;
+		const { incrementCounter, decrementCounter, data, openModal } = this.props;
 		return (
 			<div>
 				<h1>Test Area</h1>
 				<h3>The Answer is: {data} </h3>
 				<Button onClick={incrementCounter} color='green' content='Increment' />
 				<Button onClick={decrementCounter} color='red' content='Decrement' />
+				<Button onClick={() => openModal('TestModal', { data: 42 })} color='teal' content='open modal' />
 				<br />
 				<br />
-				<TestPlaceInput handleSelect={this.handleSelect}/>
-				<SimpleMap key={this.state.latlng.lng} latlng={this.state.latlng}/>
+				<TestPlaceInput handleSelect={this.handleSelect} />
+				<SimpleMap key={this.state.latlng.lng} latlng={this.state.latlng} />
 			</div>
 		);
 	}

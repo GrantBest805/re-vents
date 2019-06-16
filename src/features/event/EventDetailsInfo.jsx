@@ -37,10 +37,10 @@ const EventDetailsInfo = ({ event }) => {
 						<span>{event.venue}</span>
 					</Grid.Column>
 					<Grid.Column width={4}>
-						<Button 
-							color='teal' 
-							size='tiny' 
-							content={!isMapOpen ? 'Show Map' : 'Hide Map'} 
+						<Button
+							color='teal'
+							size='tiny'
+							content={!isMapOpen ? 'Show Map' : 'Hide Map'}
 							onClick={toggleIsMapOpen}
 						/>
 					</Grid.Column>

@@ -1,21 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { Segment, Image, Item, Button, Header } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
+import { Segment, Image, Item, Button, Header } from 'semantic-ui-react';
+import { format, parseISO } from 'date-fns';
 
 const eventImageStyle = {
-    filter: 'brightness(30%)'
+	filter: 'brightness(30%)'
 };
 
 const eventImageTextStyle = {
-    position: 'absolute',
-    bottom: '5%',
-    left: '5%',
-    width: '100%',
-    height: 'auto',
-    color: 'white'
+	position: 'absolute',
+	bottom: '5%',
+	left: '5%',
+	width: '100%',
+	height: 'auto',
+	color: 'white'
 };
 
-const EventDetailsHeader = ({event}) => {
+const EventDetailsHeader = ({ event }) => {
 	return (
 		<Segment.Group>
 			<Segment basic attached='top' style={{ padding: '0' }}>
@@ -26,7 +27,7 @@ const EventDetailsHeader = ({event}) => {
 						<Item>
 							<Item.Content>
 								<Header size='huge' content={event.title} style={{ color: 'white' }} />
-								<p>{event.date}</p>
+								{event.date && <p>{format(parseISO(event.date), 'EEEE do LLLL')}</p>}
 								<p>
 									Hosted by <strong>{`${event.hostedBy}`}</strong>
 								</p>

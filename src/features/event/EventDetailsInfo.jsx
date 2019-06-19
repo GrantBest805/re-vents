@@ -2,6 +2,7 @@ import React from 'react';
 import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
 import EventsDetailedMap from './EventsDetailedMap';
 import useToggle from '../../hooks/useToggle';
+import { format, parseISO } from 'date-fns';
 
 const EventDetailsInfo = ({ event }) => {
 	const [isMapOpen, toggleIsMapOpen] = useToggle(false);
@@ -24,7 +25,12 @@ const EventDetailsInfo = ({ event }) => {
 						<Icon name='calendar' size='large' color='teal' />
 					</Grid.Column>
 					<Grid.Column width={15}>
-						<span>{event.date}</span>
+						{event.date && (
+							<span>
+								{format(parseISO(event.date), 'EEEE do LLL')} at{' '}
+								{format(parseISO(event.date), 'h:mm a')}{' '}
+							</span>
+						)}
 					</Grid.Column>
 				</Grid>
 			</Segment>

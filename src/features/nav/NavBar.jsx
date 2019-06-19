@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withFirebase } from 'react-redux-firebase';
 import { Menu, Container, Button } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
 import { openModal } from '../modals/modalActions';
-import { logout } from '../auth/authActions';
 
 const actions = {
 	openModal,
-	logout,
 };
 
 const mapState = state => ({
-	auth: state.auth,
+	auth: state.firebase.auth, 
+	profile: state.firebase.profile
 });
 
 class NavBar extends Component {
@@ -26,13 +26,14 @@ class NavBar extends Component {
 	};
 
 	handleSignedOut = () => {
-		this.props.logout();
+		this.props.firebase.logout();
+		this.props.firebase.auth().signOut();
 		this.props.history.push('/');
 	};
 
 	render() {
-		const { auth } = this.props;
-		const authenticated = auth.authenticated;
+		const { auth, profile } = this.props;
+		const authenticated = auth.isLoaded && !auth.isEmpty;
 		return (
 			<Menu inverted fixed='top'>
 				<Container>
@@ -40,7 +41,7 @@ class NavBar extends Component {
 						<img src='/assets/logo.png' alt='logo' />
 						Crew-Up
 					</Menu.Item>
-					<Menu.Item as={NavLink} exact to='/events' name='Jobs' />
+					<Menu.Item as={NavLink} exact to='/events' name='Current Crews' />
 					{authenticated && (
 						<Fragment>
 							<Menu.Item as={NavLink} to='/test' name='Test' />
@@ -58,7 +59,7 @@ class NavBar extends Component {
 						</Fragment>
 					)}
 					{authenticated ? (
-						<SignedInMenu signOut={this.handleSignedOut} currentUser={auth.currentUser} />
+						<SignedInMenu signOut={this.handleSignedOut} profile={profile} />
 					) : (
 						<SignedOutMenu signIn={this.handleSignedIn} register={this.handleRegister} />
 					)}
@@ -68,8 +69,10 @@ class NavBar extends Component {
 	}
 }
 export default withRouter(
-	connect(
-		mapState,
-		actions
-	)(NavBar)
+	withFirebase(
+		connect(
+			mapState,
+			actions
+		)(NavBar)
+	)
 );

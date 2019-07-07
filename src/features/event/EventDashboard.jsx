@@ -18,6 +18,7 @@ const actions = {
 	updateEvent
 };
 
+
 class EventDashboard extends Component {
 	handleDeleteEvent = eventId => () => {
 		this.props.deleteEvent(eventId);

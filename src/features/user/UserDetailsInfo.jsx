@@ -8,12 +8,12 @@ const UserDetailsInfo = ({ profile }) => {
 	if (profile.occupation) {
 		occupation = profile.occupation;
 	} else {
-		occupation = 'NA';
+		occupation = 'unknown';
 	}
 	if (profile.origin) {
 		origin = profile.origin;
 	} else {
-		origin = 'NA';
+		origin = 'unknown';
   }
 	return (
 		<Segment>
@@ -29,18 +29,18 @@ const UserDetailsInfo = ({ profile }) => {
 					<p>
           Member Since: { profile.createdAt && <strong>{format(profile.createdAt.toDate(), 'LLL yyyy')}</strong> }
 					</p>
-					<p>Description of user</p>
+					<p>About me: <strong>{profile.about}</strong></p>
 				</Grid.Column>
 				<Grid.Column width={6}>
 					<Header icon='heart outline' content='Interests' />
 					<List>
 						{profile.interests && profile.interests.length === 0 ? (
-							<Item>
+							<Item >
 								<Item.Content>Really nothing interest you?</Item.Content>
 							</Item>
 						) : (
-							profile.interests && profile.interests.map(interest => (
-								<Item>
+							profile.interests && profile.interests.map((interest,index) => (
+								<Item key={index}>
 									<Icon name='heart' />
 									<Item.Content>{interest}</Item.Content>
 								</Item>

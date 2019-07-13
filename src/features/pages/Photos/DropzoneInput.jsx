@@ -20,7 +20,7 @@ const DropzoneInput = ({setFiles}) => {
 			<Icon name='upload' size='huge' />
 			<Header content='Drop image here' />
 		</div>
-	);
+	); 
 };
 
 export default DropzoneInput;

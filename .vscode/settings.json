@@ -1,3 +1,17 @@
 {
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "cSpell.words": [
+    "address",
+    "by",
+    "component",
+    "firestore",
+    "geocode",
+    "latlng",
+    "lazyload",
+    "react",
+    "subcollections",
+    "toastr",
+    "unmount",
+    "will"
+  ]
 }
